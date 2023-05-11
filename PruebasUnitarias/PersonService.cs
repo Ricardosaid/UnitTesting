@@ -36,6 +36,28 @@ public class PersonService
         Assert.True(personas.Count > 0,"Si existen personas en la coleccion");
 
     }
+
+    [Fact]
+    public void ObtenerPersonasByIdOk()
+    {
+        //Preparamos escenario
+        int id = 1;
+        //Ejecucion
+        var result = _personController.ObtenerPersonaId(id);
+        Assert.IsType<OkObjectResult>(result);
+
+    }
     
     
+    [Fact]
+    public void idExisteOk()
+    {
+        //Preparamos escenario
+        int id = 1;
+        //Ejecucion
+        var result = (OkObjectResult)_personController.ObtenerPersonaId(id);
+        var persona = Assert.IsType<Person>(result?.Value);
+        Assert.True(persona != null);
+        Assert.Equal(persona?.id,id);
+    }
 }
