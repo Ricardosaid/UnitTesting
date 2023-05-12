@@ -60,4 +60,14 @@ public class PersonService
         Assert.True(persona != null);
         Assert.Equal(persona?.id,id);
     }
+
+    [Fact]
+    public void idNotFound()
+    {
+        //ready?
+        int id = 10;
+        var result = _personController.ObtenerPersonaId(id);
+        //Assert
+        var person = Assert.IsType<NotFoundResult>(result);
+    }
 }
